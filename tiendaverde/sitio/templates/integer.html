@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        {% load static %}
+
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>AGGA</title>
+        <link
+            rel="StyleSheet"
+            href="{% static 'bootstrap/css/bootstrap.css' %}"
+            type="text/css"
+        />
+
+        <link
+            rel="StyleSheet"
+            href="{% static 'css/style.css' %}"
+            type="text/css"
+        />
+
+        <script src="{% static 'jquery.js' %}"></script>
+        <script src="{% static 'popper.js' %}"></script>
+        <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+    </head>
+    <body>
+        <input
+            type="button"
+            class="button"
+            value="erm. what the {{ id }}igma"
+            onclick="request()"
+        />
+
+        <script>
+            if (typeof jQuery == "undefined") {
+                alert("jquery is not loaded");
+            }
+            function request() {
+                $.ajax({
+                    type: "POST",
+                    url: "http://127.0.0.1:8000/api/integer",
+                    data: {
+                        csrfmiddlewaretoken: "{{csrf_token}}",
+                        text: "{{id}}",
+                    },
+                    success: function callback(response) {
+                        alert(response);
+                    },
+                });
+            }
+        </script>
+    </body>
+</html>

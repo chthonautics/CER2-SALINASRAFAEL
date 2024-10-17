@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+    <head>
+        {% load static %}
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tienda Verde</title>
+        
+        <link
+            rel="StyleSheet"
+            href="{% static 'bootstrap/css/bootstrap.css' %}"
+            type="text/css"
+        />
+
+        <link
+            rel="StyleSheet"
+            href="{% static 'css/style.css' %}"
+            type="text/css"
+        />
+
+        <script src="{% static 'jquery.js' %}"></script>
+        <script src="{% static 'popper.js' %}"></script>
+        <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+    </head>
+    <body>
+
+        <header>
+            <nav class="navbar row container-fluid">
+                <span class="col"><img src="resources/tvlogo.png" class="img-fluid" id="nav-img" alt=""></span>
+                <a href="/" class="col"><input type="button" class="navigator" value="INICIO"></input></a>
+                <a href="/store" class="col"><input type="button" class="navigator col" value="TIENDA"></input></a>
+                <a href="/form" class="col"><input type="button" class="navigator col" value="RECICLAJE"></input></a>
+            </nav>
+        </header>
+
+        <div class="separator"></div>
+
+        <h1 class="text-center">Productos</h>
+
+        <div class="separator"></div>
+
+        <div class="container-fluid row">
+
+            <div class="col-sm">
+                <div class="card row mx-auto" style="width: 15rem;">
+                    <img src="{% static 'resources/products/bag.jpg' %}" alt="Bolsa de tela" class="card-img-top card-image">
+                    <div class="card-body card-content">
+                        <h5 class="card-title">Bolsas de tela</h5>
+                        <h6 class="card-text">Nuestras bolsas de tela están hechas de materiales 100% reciclables y duraderos, asegurando una máxima reutilización.</h6>
+                        <a href="" class="btn btn-success" onclick="alert('Se ha añadido al carro')">Comprar</a>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-sm">
+                <div class="card row mx-auto" style="width: 15rem;">
+                    <img src="{% static 'resources/products/bottle.jpg' %}" alt="Botella de acero" class="card-img-top card-image">
+                    <div class="card-body card-content">
+                        <h5 class="card-title">Botellas de acero</h5>
+                        <h6 class="card-text">Estas botellas de acero son altamente reutilizables y fáciles de reciclar al ser desechadas.</h6>
+                        <a href="" class="btn btn-success" onclick="alert('Se ha añadido al carro')">Comprar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm">
+                <div class="card row mx-auto" style="width: 15rem;">
+                    <img src="{% static 'resources/products/straws.jpg' %}" alt="Bombillas de acero" class="card-img-top card-image">
+                    <div class="card-body card-content">
+                        <h5 class="card-title">Bombillas de acero</h5>
+                        <h6 class="card-text">Las bombillas de acero son más sostenibles que las de plástico, debido a que son reutilizables. Incluyen un aparato limpiador.</h6>
+                        <a href="" class="btn btn-success" onclick="alert('Se ha añadido al carro')">Comprar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm">
+                <div class="card row mx-auto" style="width: 15rem;">
+                    <img src="{% static 'resources/products/brush.png' %}" alt="Cepillos reciclables" class="card-img-top card-image">
+                    <div class="card-body card-content">
+                        <h5 class="card-title">Cepillos dentales reciclables</h5>
+                        <h6 class="card-text">Nuestros cepillos dentales hechos de bambú son reciclables y reducen considerablemente los desechos producidos por deshacerse de los cepillos convencionales.</p>
+                        <a href="" class="btn btn-success" onclick="alert('Se ha añadido al carro')">Comprar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm">
+                <div class="card row mx-auto" style="width: 15rem;">
+                    <img src="{% static 'resources/products/soap.jpg' %}" alt="Jabon natural" class="card-img-top card-image">
+                    <div class="card-body card-content">
+                        <h5 class="card-title">Jabones naturales</h5>
+                        <h6 class="card-text">Estos jabones están hechos de materlales naturales que reducen altamente el daño al medio ambiente. Vienen con varios aromas.</h6>
+                        <a href="" class="btn btn-success" onclick="alert('Se ha añadido al carro')">Comprar</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </body>
+</html>

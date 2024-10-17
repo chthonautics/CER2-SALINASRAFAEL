@@ -1,0 +1,133 @@
+@font-face {
+    font-family: Coolvetica;
+    src: url("../resources/coolvetica\ rg.otf");
+}
+
+body {
+    background-color: #a1cca5;
+}
+
+/*
+    fix header and footer to the viewport
+*/
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+
+    text-align: center;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 95%;
+    margin-left: 2%;
+    margin-right: 2%;
+
+    text-align: center;
+}
+
+/*
+    le text
+*/
+h1 {
+    color: #303030;
+    width: 100%;
+}
+
+p {
+    color: #303030;
+    width: 100%;
+}
+
+* {
+    color: #303030;
+    font-family: "Coolvetica";
+}
+
+.segment {
+    width: 100%;
+    border: none;
+}
+
+/*
+    we color the segments
+*/
+#segment1 {
+    background-color: #a1cca5;
+}
+#segment2 {
+    background-color: #8fb996;
+}
+#segment3 {
+    background-color: #709775;
+}
+#segment4 {
+    background-color: #608963;
+}
+#segment5 {
+    background-color: #507656;
+}
+
+#nav-img {
+    max-height: 20px;
+}
+
+.navbar {
+    background-color: #b6e3ba;
+    text-align: center;
+    width: 100%;
+    height: 50px;
+}
+
+.navigator {
+    color: #303030;
+    background-color: #b6e3ba;
+    height: 100%;
+
+    font-family: "Coolvetica";
+
+    border: none;
+    margin: none;
+    padding: none;
+}
+
+.separator {
+    width: 100%;
+    height: 50px;
+}
+
+/*
+.content {
+}
+*/
+
+.content-img {
+    max-height: 350px;
+}
+
+.card-content {
+    background-color: #709775;
+}
+
+.card-image {
+    height: 12rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.description {
+    font-size: larger;
+}
+
+.footer-content {
+    margin: 5px;
+
+    border-width: 5px 0px 0px 0px;
+    border-color: whitesmoke;
+    border-style: solid;
+
+    padding-top: 5px;
+}

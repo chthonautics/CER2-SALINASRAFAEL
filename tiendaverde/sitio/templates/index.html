@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        {% load static %}
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tienda Verde</title>
+
+        <link
+            rel="StyleSheet"
+            href="{% static 'bootstrap/css/bootstrap.css' %}"
+            type="text/css"
+        />
+
+        <link
+            rel="StyleSheet"
+            href="{% static 'css/style.css' %}"
+            type="text/css"
+        />
+
+        <script src="{% static 'jquery.js' %}"></script>
+        <script src="{% static 'popper.js' %}"></script>
+        <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+    </head>
+
+    <body>
+        <header>
+            <nav class="navbar row container-fluid fixed-top">
+                <span class="col"><img src="{% static 'resources/tvlogo.png' %}" class="img-fluid" id="nav-img" alt=""></span>
+                <a href="/" class="col"><input type="button" class="navigator" value="INICIO"></input></a>
+                <a href="/store" class="col"><input type="button" class="navigator" value="TIENDA"></input></a>
+                <a href="/form" class="col"><input type="button" class="navigator" value="RECICLAJE"></input></a>
+            </nav>
+        </header>
+
+        <div class="separator"></div>
+
+        <!-- main segment -->
+        <div class="row segment container-fluid" id="segment1">
+            <div class="col"><img class="content-img mx-auto d-block img-fluid object-fit-contain" src="{% static 'resources/tvlogo.png' %}" alt="Logo Tienda Verde"></div>
+        </div>
+
+        <!-- company info -->
+        <div class="row segment container-fluid" id="segment2">
+            <div class="col-sm-6">
+                <div class="row"><h1 class="text-end title">Información</h1></div>
+                <div class="row"><p class="text-end description">En Tienda Verde, ofrecemos productos y servicios ecológicamente sostenibles. Nosotros nos orientamos en reducir los desechos producidos por nuestras tareas diarias vendiendo productos reutilizables y biodegradables, además de ofrecer servicios de reciclaje a domicilio para gestionar residuos de manera más eficiente.</p></div>
+            </div>
+            <div class="col-sm-6"><img class="content-img img-fluid rounded m-2" src="{% static 'resources/gardener.jpg' %}" alt=""></div>
+        </div>
+
+        <!-- product info -->
+        <div class="row segment container-fluid" id="segment3">
+            <div class="col-sm-6"><img class="content-img float-end img-fluid rounded m-2" src="{% static 'resources/products.jpg' %}" alt=""></div>
+            <div class="col-sm-6">
+                <div class="row"><h1 class="title">Productos</h1></div>
+                <div class="row"><p class="description">En Tienda Verde, nuestros productos están hechos de material 100% biodegradable, además de ser fácil de reutilizar. Visita nuestra tienda para más Información.</p></div>
+                <a href="store.html" class="col"><input type="button" class="btn btn-success" value="Tienda >"></input></a>
+            </div>
+        </div>
+
+        <!-- recycling info -->
+        <div class="row segment container-fluid" id="segment4">
+            <div class="col-sm-6">
+                <div class="row"><h1 class="text-end title">Servicios de reciclaje</h1></div>
+                <div class="row"><p class="text-end description">Nosotros ofrecemos servicios de reciclaje a domicilio, simplemente rellena nuestro formulario con la información necesaria y enviaremos un camión de reciclaje cada semana.</p></div>
+                <a href="form.html" class="col"><input type="button" class="btn btn-success float-end" value="Reciclaje >"></input></a>
+            </div>
+            <div class="col-sm-6"><img class="content-img img-fluid rounded m-2" src="{% static 'resources/recycle.jpg' %}" alt=""></div>
+        </div>
+
+        <!-- copyright disclaimer? idk. -->
+        <div class="row segment container-fluid" id="segment5">
+            <div class="separator"></div>
+            <p>Tienda Verde, 2024, todos los derechos reservados.</p>
+        </div>
+        
+    </body>
+</html>
