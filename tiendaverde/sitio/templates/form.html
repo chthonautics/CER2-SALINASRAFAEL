@@ -26,10 +26,10 @@
     <body>
         <header>
             <nav class="navbar row">
-                <span class="col"><img src="resources/tvlogo.png" class="img-fluid" id="nav-img" alt=""></span>
-                <a href="/" class="col"><input type="button" class="navigator" value="INICIO"></input></a>
-                <a href="/store" class="col"><input type="button" class="navigator col" value="TIENDA"></input></a>
-                <a href="/form" class="col"><input type="button" class="navigator col" value="RECICLAJE"></input></a>
+                <span class="col"><img src="{% static 'resources/tvlogo.png' %}" class="img-fluid" id="nav-img" alt=""></span>
+                <a href="/" class="col"><input type="button" class="navigator" value="INICIO"></a>
+                <a href="/store" class="col"><input type="button" class="navigator col" value="TIENDA"></a>
+                <a href="/form" class="col"><input type="button" class="navigator col" value="RECICLAJE"></a>
             </nav>
         </header>
 
@@ -42,7 +42,9 @@
         <div class="separator"></div>
 
         <div class="row container-fluid mx-auto" style="max-width: 50rem;">
-            <form id="recycleForm">
+            <iframe name="dframe" id="dframe" style="display: none"></iframe>
+            <form id="recycleForm" action="/api/recycle/" method="post" target="dframe">
+                {% csrf_token %}
                 <div class="btn-group mb-3">
                     <button type="button" class="btn btn-success dropdown-toggle" id="waste-label" data-bs-toggle="dropdown" aria-expanded="false" onClick="waste()">
                         Tipo de desecho
@@ -58,34 +60,67 @@
                 </div>
 
                 <!-- auto generated waste type (jank fest) -->
-                <div class="btn-group mb-3">
-                    <button type="button" class="btn btn-success dropdown-toggle" id="subwaste-label" data-bs-toggle="dropdown" aria-expanded="false">
-                        Desecho
-                    </button>
+                    <div class="btn-group mb-3">
+                        <button type="button" class="btn btn-success dropdown-toggle" id="subwaste-label" data-bs-toggle="dropdown" aria-expanded="false">
+                            Desecho
+                        </button>
+    
+                        <ul class="dropdown-menu" id="subwaste-dropdown">
+                        </ul> 
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="inputName" class="form-label">Nombre completo</label>
+                        {{ form.name }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputEmail" class="form-label">Dirección de correo</label>
+                        {{ form.email }}
+                        <div id="emailHelp" class="form-text">No compratiremos tu dirección con nadie.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputAddress" class="form-label">Dirección</label>
+                        {{ form.address }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputComment" class="form-label">Comentarios adicionales</label>
+                        {{ form.comment }}
+                    </div>
+    
+                    <input type="submit" class="btn btn-success" id="form-submit" disabled value="Enviar">
+                </form>
 
-                    <ul class="dropdown-menu" id="subwaste-dropdown">
-                    </ul> 
-                </div>
-                
-                <div class="mb-3">
-                    <label for="inputName" class="form-label">Nombre completo</label>
-                    <input type="text" class="form-control" id="inputName" oninput="verify()">
-                </div>
-                <div class="mb-3">
-                    <label for="inputEmail" class="form-label">Dirección de correo</label>
-                    <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" oninput="verify()">
-                    <div id="emailHelp" class="form-text">No compratiremos tu dirección con nadie.</div>
-                </div>
-                <div class="mb-3">
-                    <label for="inputAddress" class="form-label">Dirección</label>
-                    <input type="text" class="form-control" id="inputAddress" oninput="verify()">
-                </div>
-                <div class="mb-3">
-                    <label for="inputComment" class="form-label">Comentarios adicionales</label>
-                    <textarea class="form-control" id="inputComment" style="height: 5rem;"></textarea>
-                </div>
+                <script>
+                    if (typeof jQuery == "undefined") {
+                        alert("jquery is not loaded")
+                    }
+        
+                    var form = $("#recycleForm")
+                    form.submit(function(){
+                        var formdata = form.serializeArray()
 
-                <button type="button" class="btn btn-success" id="form-submit" onclick="alert('Se ha enviado el formulario')" disabled>Enviar</button>
+                        // me when i insert data into the form request
+                        formdata.push({
+                            'name': "waste",
+                            'value': document.getElementById("subwaste-label").innerHTML.toLowerCase()
+                        })
+
+                        $.ajax({
+                            type: form.attr("method"),
+                            url: form.attr("action"),
+                            data: formdata,
+                            success: function (response) {
+                                console.log(this.data)
+                                alert("Se ha enviado el formulario");
+                            },
+                            error: function(response){
+                                console.log(this.data)
+                                alert(response)
+                            }
+                        });
+                        return false
+                    })            
+                </script>
             </form>
         </div>
     </body>

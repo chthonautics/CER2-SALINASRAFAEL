@@ -13,5 +13,8 @@ class products(models.Model):
 
 class orders(models.Model):
     user_id = models.IntegerField()
-    products = models.CharField(max_length=1024)
     status = models.BooleanField()
+
+class orderproducts(models.Model):
+    product_id = models.IntegerField()
+    order_id = models.IntegerField()

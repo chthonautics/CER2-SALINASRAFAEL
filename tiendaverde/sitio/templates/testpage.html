@@ -23,30 +23,33 @@
         <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
     </head>
     <body>
-        <input
-            type="button"
-            class="button"
-            value="erm. what the {{ id }}igma"
-            onclick="request()"
-        />
+        <iframe name="dframe" id="dframe" style="display: none"></iframe>
+        <form id="form" action="/api/integer/" method="post" target="dframe">
+            {% csrf_token %} {{ form }}
+            <input type="submit" value="Submit" />
+        </form>
 
         <script>
             if (typeof jQuery == "undefined") {
-                alert("jquery is not loaded");
+                alert("jquery is not loaded")
             }
-            function request() {
+
+            var form = $("#form")
+            form.submit(function(){
                 $.ajax({
-                    type: "POST",
-                    url: "http://127.0.0.1:8000/api/integer",
-                    data: {
-                        csrfmiddlewaretoken: "{{csrf_token}}",
-                        text: "{{id}}",
+                    type: form.attr("method"),
+                    url: form.attr("action"),
+                    data: form.serialize(),
+                    success: function (data) {
+                        console.log(data)
+                        alert(data);
                     },
-                    success: function callback(response) {
-                        alert(response);
-                    },
+                    error: function(data){
+                        alert(data)
+                    }
                 });
-            }
+                return false
+            })            
         </script>
     </body>
 </html>

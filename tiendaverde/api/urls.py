@@ -3,5 +3,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('integer/<int:id>/', views.integer, name="integer")
+    path('integer/', views.integer, name="integer"),
+    path('recycle/', views.recycle, name="recycle")
 ]
