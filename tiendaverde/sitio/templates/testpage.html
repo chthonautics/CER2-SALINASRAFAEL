@@ -25,7 +25,7 @@
     <body>
         <iframe name="dframe" id="dframe" style="display: none"></iframe>
         <form id="form" action="/api/integer/" method="post" target="dframe">
-            {% csrf_token %} {{ form }}
+            {% csrf_token %} {{ testform }}
             <input type="submit" value="Submit" />
         </form>
 

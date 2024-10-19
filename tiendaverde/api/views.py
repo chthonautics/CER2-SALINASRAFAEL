@@ -10,3 +10,11 @@ def integer(request):
 def recycle(request):
     print(request.POST)
     return HttpResponse(request.POST.get('value'))
+
+def login(request):
+    print(request.POST)
+    return HttpResponse(request.POST.get('value'))
+
+def register(request):
+    print(request.POST)
+    return HttpResponse(request.POST.get('value'))

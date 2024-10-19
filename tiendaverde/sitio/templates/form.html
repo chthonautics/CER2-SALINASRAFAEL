@@ -60,35 +60,34 @@
                 </div>
 
                 <!-- auto generated waste type (jank fest) -->
-                    <div class="btn-group mb-3">
-                        <button type="button" class="btn btn-success dropdown-toggle" id="subwaste-label" data-bs-toggle="dropdown" aria-expanded="false">
-                            Desecho
-                        </button>
-    
-                        <ul class="dropdown-menu" id="subwaste-dropdown">
-                        </ul> 
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="inputName" class="form-label">Nombre completo</label>
-                        {{ form.name }}
-                    </div>
-                    <div class="mb-3">
-                        <label for="inputEmail" class="form-label">Dirección de correo</label>
-                        {{ form.email }}
-                        <div id="emailHelp" class="form-text">No compratiremos tu dirección con nadie.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="inputAddress" class="form-label">Dirección</label>
-                        {{ form.address }}
-                    </div>
-                    <div class="mb-3">
-                        <label for="inputComment" class="form-label">Comentarios adicionales</label>
-                        {{ form.comment }}
-                    </div>
-    
-                    <input type="submit" class="btn btn-success" id="form-submit" disabled value="Enviar">
-                </form>
+                <div class="btn-group mb-3">
+                    <button type="button" class="btn btn-success dropdown-toggle" id="subwaste-label" data-bs-toggle="dropdown" aria-expanded="false">
+                        Desecho
+                    </button>
+
+                    <ul class="dropdown-menu" id="subwaste-dropdown">
+                    </ul> 
+                </div>
+                
+                <div class="mb-3">
+                    <label for="inputName" class="form-label">Nombre completo</label>
+                    {{ form.name }}
+                </div>
+                <div class="mb-3">
+                    <label for="inputEmail" class="form-label">Dirección de correo</label>
+                    {{ form.email }}
+                    <div id="emailHelp" class="form-text">No compratiremos tu dirección con nadie.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="inputAddress" class="form-label">Dirección</label>
+                    {{ form.address }}
+                </div>
+                <div class="mb-3">
+                    <label for="inputComment" class="form-label">Comentarios adicionales</label>
+                    {{ form.comment }}
+                </div>
+
+                <input type="submit" class="btn btn-success" id="form-submit" disabled value="Enviar">
 
                 <script>
                     if (typeof jQuery == "undefined") {
@@ -98,13 +97,13 @@
                     var form = $("#recycleForm")
                     form.submit(function(){
                         var formdata = form.serializeArray()
-
+        
                         // me when i insert data into the form request
                         formdata.push({
                             'name': "waste",
                             'value': document.getElementById("subwaste-label").innerHTML.toLowerCase()
                         })
-
+        
                         $.ajax({
                             type: form.attr("method"),
                             url: form.attr("action"),

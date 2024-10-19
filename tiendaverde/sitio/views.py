@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse
-from .forms import testform, recycle
+from .forms import *
 
 # Create your views here.
 
@@ -22,6 +22,16 @@ def form(request):
     data = {'form': recycle()}
 
     return render(request, 'form.html', data)
+
+def login(request):
+    data = {'form': loginform()}
+
+    return render(request, 'login.html', data)
+
+def register(request):
+    data = {'form': registerform()}
+
+    return render(request, 'register.html', data)
 
 def test(request):
     data = {'form': testform()}
