@@ -43,7 +43,7 @@
 
         <div class="row container-fluid mx-auto" style="max-width: 50rem;">
             <iframe name="dframe" id="dframe" style="display: none"></iframe>
-            <form id="recycleForm" action="/api/recycle/" method="post" target="dframe">
+            <form id="loginForm" action="/api/login/" method="post" target="dframe">
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="inputEmail" class="form-label">Dirección de correo</label>
@@ -61,7 +61,7 @@
                         alert("jquery is not loaded")
                     }
         
-                    var form = $("#recycleForm")
+                    var form = $("#loginForm")
 
                     form.submit(function(){
                         var formdata = form.serializeArray()
