@@ -30,6 +30,7 @@
                 <a href="/" class="col"><input type="button" class="navigator" value="INICIO"></a>
                 <a href="/store" class="col"><input type="button" class="navigator col" value="TIENDA"></a>
                 <a href="/form" class="col"><input type="button" class="navigator col" value="RECICLAJE"></a>
+                <a href="/login" class="col"><input type="button" class="navigator" value="CUENTA"></input></a>
             </nav>
         </header>
 
@@ -37,6 +38,10 @@
 
         <div class="row">
             <h1 class="col text-center">Iniciar sesión</h1>
+        </div>
+
+        <div class="row">
+            <h6 class="col text-center">Si no tiene cuenta, puede crear una <a href="/register">aquí</a></h6>
         </div>
 
         <div class="separator"></div>
@@ -83,8 +88,8 @@
                                 url: form.attr("action"),
                                 data: formdata,
                                 success: function (response) {
-                                    console.log(this.data)
                                     alert("Se ha iniciado sesión correctamente");
+                                    window.location.replace("/")
                                 },
                                 error: function(response){
                                     switch(response.status){
