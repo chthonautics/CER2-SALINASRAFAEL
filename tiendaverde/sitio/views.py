@@ -3,10 +3,16 @@ from django.template import loader
 from django.http import HttpResponse
 from .forms import *
 
+from api import models
+
 # Create your views here.
 
 def index(request):
     data = {}
+
+    token = models.user.objects.filter(session_token=request.session.get("token")).values()
+    print(token)
+    print(request.session.get("token"))
 
     if request.POST:
         print(request.POST.get(''))

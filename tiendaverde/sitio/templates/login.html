@@ -87,8 +87,15 @@
                                     alert("Se ha iniciado sesión correctamente");
                                 },
                                 error: function(response){
-                                    console.log(this.data)
-                                    alert(response)
+                                    switch(response.status){
+                                        case 403:
+                                        case 409:
+                                            alert("Credenciales incorrectas")
+                                        break;
+                                        default:
+                                            alert("Ha ocurrido un error")
+                                        break;
+                                    }
                                 }
                             })
                         })

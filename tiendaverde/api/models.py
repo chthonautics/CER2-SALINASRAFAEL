@@ -5,9 +5,10 @@ class user(models.Model):
     name = models.CharField(max_length=128)
     email = models.CharField(max_length=128, unique=True)
     password_sha256 = models.CharField(max_length=64)
+    session_token = models.CharField(max_length=32)
 
 class product(models.Model):
-    name = models.CharField(max_length=256),
+    name = models.CharField(max_length=128)
     price = models.IntegerField()
 
 class order(models.Model):

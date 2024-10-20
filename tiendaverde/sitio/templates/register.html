@@ -97,12 +97,17 @@
                                 url: form.attr("action"),
                                 data: formdata,
                                 success: function (response) {
-                                    console.log(this.data)
                                     alert("Se ha enviado el formulario");
                                 },
                                 error: function(response){
-                                    console.log(this.data)
-                                    alert(response)
+                                    switch(response.status){
+                                        case 409:
+                                            alert("Este email ya se encuentra registrado")
+                                        break;
+                                        default:
+                                            alert("Ha ocurrido un error")
+                                        break;
+                                    }
                                 }
                             })
                         })

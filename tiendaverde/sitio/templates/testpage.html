@@ -25,7 +25,7 @@
     <body>
         <iframe name="dframe" id="dframe" style="display: none"></iframe>
         <form id="form" action="/api/integer/" method="post" target="dframe">
-            {% csrf_token %} {{ testform }}
+            {% csrf_token %} {{ form }}
             <input type="submit" value="Submit" />
         </form>
 
@@ -41,11 +41,10 @@
                     url: form.attr("action"),
                     data: form.serialize(),
                     success: function (data) {
-                        console.log(data)
-                        alert(data);
+                        alert(data.status);
                     },
                     error: function(data){
-                        alert(data)
+                        alert(data.status)
                     }
                 });
                 return false
