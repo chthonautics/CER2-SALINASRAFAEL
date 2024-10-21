@@ -5,6 +5,8 @@ from .forms import *
 
 from api import models
 
+import json
+
 # verify if session is valid
 def __verify_account(request):
     # check if client token exists before indexing because otherwise it throws a fit like a baby
@@ -17,13 +19,6 @@ def __verify_account(request):
 
 def index(request):
     data = {}
-
-    token = models.user.objects.filter(session_token=request.session.get("token")).values()
-    print(token)
-    print(request.session.get("token"))
-
-    if request.POST:
-        print(request.POST.get(''))
 
     return render(request, 'index.html', data)
 
@@ -57,12 +52,26 @@ def register(request):
     return render(request, 'register.html', data)
 
 def account(request):
-    data = {models.user.objects.filter(session_token=request.session.get("token")).values()[0]}
+    if(not __verify_account(request)):
+        return redirect("/login")
+    
+    session = models.user.objects.filter(session_token=request.session.get("token")).values()[0]
+
+    cartData = []
+    cart = json.loads(request.session.get("cart") or "[]")
+    sum = 0
+
+    for item in cart or []:
+        itemData = models.product.objects.filter(name_id=item) and models.product.objects.filter(name_id=item).values()[0]
+
+        cartData.append(itemData)
+        sum += itemData["price"]
+
+    data = {
+        'name' : session.get("name"),
+        'email': session.get("email"),
+        'cart' : cartData,
+        'total': sum
+    }
 
     return render(request, 'account.html', data)
-
-# for testing
-def test(request):
-    data = {'form': testform()}
-
-    return render(request, 'testpage.html', data)

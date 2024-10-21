@@ -3,7 +3,7 @@ from django.template import loader
 from django.http import HttpResponse
 from .models import *
 
-import os
+import os, json
 
 # http response codes
 # 200 = OK
@@ -26,19 +26,68 @@ def __verify_account(request):
 
 # Create your views here.
 
-# for testing, might delete
-def integer(request):
-    print(request.POST)
-
-    if(request.session.test_cookie_worked()):
-        request.session.delete_test_cookie()
-        return HttpResponse(status=200)
-
-    return HttpResponse(status=404)
-
 # not necessary according to specs so im leaving it as is
 def recycle(request):
     print(request.POST)
+    return HttpResponse(status=200)
+
+def addcart(request):
+    if(not __verify_account(request)):
+        return HttpResponse(status=403)
+
+    if(not request.session.get("cart")):
+        request.session["cart"] = json.dumps([])
+
+    # deserialize list, append then serialize back into session
+    data = json.loads(request.session["cart"])
+    data.append(request.POST.get("item"))
+    request.session["cart"] = json.dumps(data)
+
+    return HttpResponse(status=200)
+
+def removecart(request):
+    if(not __verify_account(request)):
+        return HttpResponse(status=403)
+    
+    cart = json.loads(request.session.get("cart"))
+    newcart = []
+    deleted = False
+
+    for item in cart:
+        if(item != request.POST.get("id") or deleted):
+            newcart.append(item)
+        else:
+            deleted = True
+    
+    request.session["cart"] = json.dumps(newcart)
+
+    return HttpResponse(status=200)
+
+def purchase(request):
+    if(not __verify_account(request)):
+        return HttpResponse(status=403)
+    
+    customer = user.objects.get(session_token=request.session["token"])
+    cart = json.loads(request.session.get("cart"))
+
+    # create object entry
+    order(
+        user = customer,
+        status = False
+    ).save()
+
+    # create orderproduct entries for many:many relationships
+    for item in cart:
+        itemData = product.objects.get(name_id=item)
+        orderData = order.objects.get(user=customer)
+        
+        orderproduct(
+            product_id = itemData,
+            order_id = orderData
+        ).save()
+    
+    request.session["cart"] = ""
+
     return HttpResponse(status=200)
 
 def login(request):
@@ -59,8 +108,6 @@ def login(request):
     return HttpResponse(status=200)
 
 def register(request):
-    print(request.POST)
-
     # reject request if user already exists
     if(user.objects.filter(email=request.POST.get("email"))):
         return HttpResponse(status=409)

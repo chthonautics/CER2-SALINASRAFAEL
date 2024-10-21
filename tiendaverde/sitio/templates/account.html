@@ -43,43 +43,98 @@
         <div class="separator"></div>
 
         <div class="row container-fluid mx-auto" style="max-width: 50rem;">
-            <iframe name="dframe" id="dframe" style="display: none"></iframe>
-            <form id="logoutForm" action="/api/logout/" method="post" target="dframe">
-                {% csrf_token %}
-
-                <input type="submit" class="btn btn-success" id="form-submit" value="Cerrar sesión">
-                <script>
-                    if (typeof jQuery == "undefined") {
-                        alert("jquery is not loaded")
-                    }
-        
-                    var form = $("#logoutForm")
-
-                    form.submit(function(){
-                        $.ajax({
-                            type: form.attr("method"),
-                            url: form.attr("action"),
-                            data: form.serializeArray(),
-                            success: function (response) {
-                                alert("Se ha cerrado la sesión")
-                                window.location.replace("/")
-                            },
-                            error: function(response){
-                                switch(response.status){
-                                    case 403:
-                                    case 409:
-                                        alert("Credenciales incorrectas")
-                                    break;
-                                    default:
-                                        alert("Ha ocurrido un error")
-                                    break;
-                                }
-                            }
-                        })
-                        return false
-                    })            
-                </script>
-            </form>
+            <h5 class="row">Nombre: {{name}}</h5>
+            <h5 class="row">Email: {{email}}</h5>
         </div>
+        
+        <div class="row container-fluid mx-auto" style="max-width: 50rem;">
+            <h5 class="row">Carro:</h5>
+
+            {% for item in cart %}
+                <div class="row">
+                    <h6 class="col">{{ item.name }} (${{ item.price }})</h6>
+                    <button class="col btn btn-danger" style="max-width: 10rem;" onclick="remove('{{ item.name_id }}')">Eliminar</button>
+                </div>
+            {% endfor %}
+
+            <h5 class="row">Total: ${{ total }}</h5>
+
+            <div class="separator"></div>
+
+            <button class="btn btn-success" onclick="purchase()">Confirmar orden</button>
+            <div class="separator"></div>
+            <button class="btn btn-success" onclick="logout()">Cerrar sesión</button>
+        </div>
+
+        <script>
+            if (typeof jQuery == "undefined") {
+                alert("jquery is not loaded")
+            }
+
+            function purchase(){
+                $.ajax({
+                    type: "post",
+                    url: "/api/purchase/",
+                    data: { 
+                        csrfmiddlewaretoken: "{{ csrf_token }}" 
+                    },
+                    success: function (response) {
+                        alert("Se ha confirmado la orden")
+                        window.location.replace("/account")
+                    },
+                    error: function(response){
+                        switch(response.status){
+                            default:
+                                alert("Ha ocurrido un error")
+                            break;
+                        }
+                    }
+                })
+            }
+
+            function remove(id){
+                $.ajax({
+                    type: "post",
+                    url: "/api/removecart/",
+                    data: { 
+                        id: id,
+                        csrfmiddlewaretoken: "{{ csrf_token }}" 
+                    },
+                    success: function (response) {
+                        alert("Se ha eliminado el item")
+                        window.location.replace("/account")
+                    },
+                    error: function(response){
+                        switch(response.status){
+                            default:
+                                alert("Ha ocurrido un error")
+                            break;
+                        }
+                    }
+                })
+            }
+
+            function logout(){
+                $.ajax({
+                    type: "post",
+                    url: "/api/logout/",
+                    data: { 
+                        csrfmiddlewaretoken: "{{ csrf_token }}" 
+                    },
+                    success: function (response) {
+                        alert("Se ha cerrado la sesión")
+                        window.location.replace("/")
+                    },
+                    error: function(response){
+                        switch(response.status){
+                            default:
+                                alert("Ha ocurrido un error")
+                            break;
+                        }
+                    }
+                })
+            }
+                
+        </script>
     </body>
 </html>

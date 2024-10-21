@@ -8,6 +8,7 @@ class user(models.Model):
     session_token = models.CharField(max_length=32, unique=True)
 
 class product(models.Model):
+    name_id = models.CharField(max_length=64, unique=True)
     name = models.CharField(max_length=128)
     price = models.IntegerField()
 

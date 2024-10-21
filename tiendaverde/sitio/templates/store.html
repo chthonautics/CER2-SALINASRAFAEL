@@ -41,14 +41,14 @@
         <div class="separator"></div>
 
         <div class="container-fluid row">
-
+            
             <div class="col-sm">
                 <div class="card row mx-auto" style="width: 15rem;">
                     <img src="{% static 'resources/products/bag.jpg' %}" alt="Bolsa de tela" class="card-img-top card-image">
                     <div class="card-body card-content">
                         <h5 class="card-title">Bolsas de tela</h5>
                         <h6 class="card-text">Nuestras bolsas de tela están hechas de materiales 100% reciclables y duraderos, asegurando una máxima reutilización.</h6>
-                        <a href="" class="btn btn-success" onclick="alert('Se ha añadido al carro')">Comprar</a>
+                        <button class="btn btn-success" onclick="buy('bag')">Comprar</button>
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                     <div class="card-body card-content">
                         <h5 class="card-title">Botellas de acero</h5>
                         <h6 class="card-text">Estas botellas de acero son altamente reutilizables y fáciles de reciclar al ser desechadas.</h6>
-                        <a href="" class="btn btn-success" onclick="alert('Se ha añadido al carro')">Comprar</a>
+                        <button class="btn btn-success" onclick="buy('bottle')">Comprar</button>
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                     <div class="card-body card-content">
                         <h5 class="card-title">Bombillas de acero</h5>
                         <h6 class="card-text">Las bombillas de acero son más sostenibles que las de plástico, debido a que son reutilizables. Incluyen un aparato limpiador.</h6>
-                        <a href="" class="btn btn-success" onclick="alert('Se ha añadido al carro')">Comprar</a>
+                        <button class="btn btn-success" onclick="buy('straw')">Comprar</button>
                     </div>
                 </div>
             </div>
@@ -81,7 +81,7 @@
                     <div class="card-body card-content">
                         <h5 class="card-title">Cepillos dentales reciclables</h5>
                         <h6 class="card-text">Nuestros cepillos dentales hechos de bambú son reciclables y reducen considerablemente los desechos producidos por deshacerse de los cepillos convencionales.</p>
-                        <a href="" class="btn btn-success" onclick="alert('Se ha añadido al carro')">Comprar</a>
+                            <button class="btn btn-success" onclick="buy('brush')">Comprar</button>
                     </div>
                 </div>
             </div>
@@ -92,12 +92,39 @@
                     <div class="card-body card-content">
                         <h5 class="card-title">Jabones naturales</h5>
                         <h6 class="card-text">Estos jabones están hechos de materlales naturales que reducen altamente el daño al medio ambiente. Vienen con varios aromas.</h6>
-                        <a href="" class="btn btn-success" onclick="alert('Se ha añadido al carro')">Comprar</a>
+                        <button class="btn btn-success" onclick="buy('soap')">Comprar</button>
                     </div>
                 </div>
             </div>
 
         </div>
+
+        <script>
+            if (typeof jQuery == "undefined") {
+                alert("jquery is not loaded")
+            }
+
+            function buy(itemType){
+                $.ajax({
+                    type: "post",
+                    url: "/api/addcart/",
+                    data: { 
+                        item: itemType,
+                        csrfmiddlewaretoken: "{{ csrf_token }}" 
+                    },
+                    success: function (response) {
+                        alert("Se ha añadido al carro");
+                    },
+                    error: function(response){
+                        switch(response.status){
+                            default:
+                                alert("Ha ocurrido un error")
+                            break;
+                        }
+                    }
+                })
+            }
+        </script>
 
     </body>
 </html>
